@@ -205,5 +205,8 @@ export default defineConfig((ctx) => {
        */
       extraScripts: []
     }
+    build: {
+  publicPath: '/331-thanakrit-lertparsert/',
+}
   }
 })
