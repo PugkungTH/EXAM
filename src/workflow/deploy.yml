@@ -1,13 +1,14 @@
 name: Deploy Quasar SPA to GitHub Pages
+
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "cicd" ] # ✅ เปลี่ยนเป็น branch ที่คุณใช้จริง (ไม่ใช่ master)
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write  # Allow pushing to gh-pages
 
     steps:
       - name: Checkout repository
@@ -16,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '20'  # Node.js เวอร์ชัน >= 18
 
       - name: Install dependencies
         run: npm install
@@ -27,5 +28,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # ใช้ secret อัตโนมัติ
           publish_dir: dist/spa
